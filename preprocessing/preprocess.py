@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-df = pd.read_csv("data/driving_log.csv", header=None)
+df = pd.read_csv("data/driving_log.csv", header=None, nrows=2678)
 
 # Convert column 3 to numeric, coercing errors to NaN
 df[3] = pd.to_numeric(df[3], errors='coerce')

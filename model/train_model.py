@@ -12,26 +12,15 @@ from keras.optimizers import Adam
 warnings.filterwarnings('ignore')
 
 # 1. Load and preprocess data
-df = pd.read_csv("data/driving_log.csv", header=None)
-# Filter rows where column 0 starts with "IMG/center"
-df_filtered = df[df[0].str.startswith("IMG/center")]
+df = pd.read_csv("data/driving_log.csv", header=None, nrows=2678)
 
-# Strip whitespace and convert column 3 to numeric (steering angle)
-df_filtered[3] = df_filtered[3].astype(str).str.strip()
-df_filtered[3] = pd.to_numeric(df_filtered[3], errors='coerce')
+print(df.tail())
 
-# Drop rows where column 3 is NaN after conversion
-df_filtered = df_filtered.dropna(subset=[3])
-
-print("Number of rows after filtering:", len(df_filtered))
-print("Number of NaNs in column 3:", df_filtered[3].isna().sum())
-print(df_filtered.head())
-
-labels = df_filtered[3]
+labels = df[3]
 data = []
 
-for i in range(len(df_filtered)):
-    address = "data/" + df_filtered.iloc[i, 0]
+for i in range(len(df)):
+    address = "data/" + df.iloc[i, 0]
     image = cv2.imread(address)
 
     #print(address)
@@ -115,7 +104,7 @@ def augment_image(img, steering_angle):
     return img, steering_angle
 
 # 3. Batch generators
-'''
+
 def train_generator(X, y, batch_size):
     num_samples = len(X)
     while True:
@@ -130,7 +119,7 @@ def train_generator(X, y, batch_size):
                 batch_images.append(img)
                 batch_angles.append(angle)
             yield np.array(batch_images), np.array(batch_angles)
-'''
+"""
 def train_generator(X, y, batch_size):
     num_samples = len(X)
     while True:
@@ -146,7 +135,7 @@ def train_generator(X, y, batch_size):
                 batch_angles.append(y[i])
             yield np.array(batch_images), np.array(batch_angles)
 
-
+"""
 def val_generator(X, y, batch_size):
     num_samples = len(X)
     while True:
