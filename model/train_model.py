@@ -12,7 +12,7 @@ from keras.optimizers import Adam
 warnings.filterwarnings('ignore')
 
 # 1. Load and preprocess data
-df = pd.read_csv("data/driving_log.csv", header=None, nrows=2678)
+df = pd.read_csv("data/driving_log.csv", header=None)
 
 print(df.tail())
 
@@ -203,7 +203,8 @@ plt.legend()
 
 plt.tight_layout()
 plt.show()
-
+'''
 # Save the trained model so TestSimulation.py can load it
 model.save("Self_model.h5")
 print("[INFO] Model saved as Self_model.h5")
+'''
