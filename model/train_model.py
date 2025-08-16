@@ -203,8 +203,7 @@ plt.legend()
 
 plt.tight_layout()
 plt.show()
-'''
+
 # Save the trained model so TestSimulation.py can load it
 model.save("Self_model.h5")
-print("[INFO] Model saved as Self_model.h5")
-'''
+print("[INFO] Model saved as Self_model_2.h5")
