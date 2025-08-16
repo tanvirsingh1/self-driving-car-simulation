@@ -16,7 +16,7 @@ df = pd.read_csv("data/driving_log.csv", header=None)
 
 print(df.tail())
 
-labels = df[3]
+labels = pd.to_numeric(df[3], errors='coerce')
 data = []
 
 for i in range(len(df)):
@@ -62,7 +62,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 
 def augment_image(img, steering_angle):
     # Horizontal flip
-    if np.random.rand() < 0.5:
+    if np.random.rand() < 0.5 and steering_angle < 0:
         img = cv2.flip(img, 1)
         steering_angle = -steering_angle
 
@@ -205,5 +205,5 @@ plt.tight_layout()
 plt.show()
 
 # Save the trained model so TestSimulation.py can load it
-model.save("Self_model.h5")
+model.save("Self_mode_2.h5")
 print("[INFO] Model saved as Self_model_2.h5")
